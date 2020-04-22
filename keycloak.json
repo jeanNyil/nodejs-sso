@@ -1,0 +1,18 @@
+{
+  "realm": "Adherents_Recette",
+  "bearer-only": true,
+  "auth-server-url": "https://secure-sso.apps.cluster-deae.sandbox235.opentlc.com/auth/",
+  "ssl-required": "none",
+  "disable-trust-manager": true,
+  "allow-any-hostname": true,
+  "truststore": "/Users/jnyilimb/workdata/CONSULTING/LaCIPAV/ssl/truststore.jks",
+  "truststore-password": "secret",
+  "resource": "Online-account",
+  "verify-token-audience": true,
+  "use-resource-role-mappings": true,
+  "enable-cors" : true,
+  "cors-max-age" : 1000,
+  "cors-allowed-methods" : "POST, PUT, DELETE, GET",
+  "confidential-port": 0,
+  "connection-pool-size" : 20
+}
