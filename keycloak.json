@@ -1,12 +1,10 @@
 {
   "realm": "Adherents_Recette",
   "bearer-only": true,
-  "auth-server-url": "http://sso-sso-server.apps.cluster-deae.sandbox235.opentlc.com/auth/",
+  "auth-server-url": "http://sso-sso-server.apps.cluster-deae.sandbox235.opentlc.com/auth",
   "ssl-required": "none",
   "disable-trust-manager": true,
   "allow-any-hostname": true,
-  "truststore": "/Users/jnyilimb/workdata/CONSULTING/LaCIPAV/ssl/truststore.jks",
-  "truststore-password": "secret",
   "resource": "Online-account",
   "verify-token-audience": true,
   "use-resource-role-mappings": true,
