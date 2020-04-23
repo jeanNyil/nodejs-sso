@@ -132,8 +132,10 @@ Access should be granted because the `admin`user has the `secure` role.
 
 ## Deploy on OpenShift
 
-### Prerequisites
-- Access to a Red Hat OpenShift cluster v3 or v4
+### Pre-requisites
+- Access to a [Red Hat OpenShift](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.3/) cluster v3 or v4
+
+### Deployment instructions
 
 1. Login to the OpenShift cluster
     ```
