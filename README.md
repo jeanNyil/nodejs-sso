@@ -43,29 +43,13 @@ You have to adapt the `auth-server-url` property in the [keycloak.json](./keyclo
 1. Build:
 
     ```
-    # npm install
-
-    npm WARN nodejs-sso@1.0.0 No repository field.
-
-    audited 360 packages in 1.331s
-
-    3 packages are looking for funding
-    run `npm fund` for details
-
-    found 0 vulnerabilities
+    npm install
     ```
 
 2. Run the Node.js RESTful service
 
     ```
-    # npm start
-
-    > nodejs-sso@1.0.0 start /Users/jnyilimb/workdata/CONSULTING/LaCIPAV/PoC/nodejs-sso
-    > ts-node server.ts
-
-    ==> Deactivating certificate validation ( /!\ not recommended in PRODUCTION! )
-    env NODE_TLS_REJECT_UNAUTHORIZED:  0
-    { message: 'App is now running on port 8080' } START
+    npm start
     ```
 
 ### Test with a regular `user`
@@ -74,7 +58,7 @@ Access should be denied because the `user`does not have the `secure` role.
 
 1. Retrieve the user ${ACCESS_TOKEN}
     ```
-    # ACCESS_TOKEN=$(curl -k -X POST \
+    ACCESS_TOKEN=$(curl -k -X POST \
     https://secure-sso.apps.cluster-deae.sandbox235.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=user' \
@@ -87,7 +71,7 @@ Access should be denied because the `user`does not have the `secure` role.
 2. Call the Node.js service with the retrieved `user` ${ACCESS_TOKEN} => access should be denied
 
     ```
-    # curl -v -w '\n' http://localhost:8080/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
+    curl -v -w '\n' http://localhost:8080/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
 
     *   Trying ::1...
     * TCP_NODELAY set
@@ -113,7 +97,7 @@ Access should be granted because the `admin`user has the `secure` role.
 1. Retrieve the `admin` ${ACCESS_TOKEN}
 
     ```
-    # ACCESS_TOKEN=$(curl -k -X POST \
+    ACCESS_TOKEN=$(curl -k -X POST \
     https://secure-sso.apps.cluster-deae.sandbox235.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin' \
@@ -123,11 +107,10 @@ Access should be granted because the `admin`user has the `secure` role.
     -d 'scope=openid nodejs-apiserver' | jq --raw-output '.access_token')
     ```
 
-2. Call the Node.js service with the retrieved `admin` $
-    
-    {ACCESS_TOKEN} => access should be granted
+2. Call the Node.js service with the retrieved `admin` {ACCESS_TOKEN} => access should be granted
+
     ```
-    # curl -v -w '\n' http://localhost:8080/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
+    curl -v -w '\n' http://localhost:8080/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
 
     *   Trying ::1...
     * TCP_NODELAY set
