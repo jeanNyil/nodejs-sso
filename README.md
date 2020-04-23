@@ -16,16 +16,11 @@ There are 2 endpoints exposed by the service:
 The [nodejs-example_realm.json](./config/nodejs-example_realm.json) file is a full export of the `nodejs-example` Red Hat SSO Realm:
 
 - 2 clients:
-
     - `frontend-mock`: a _public_ client used to obtain a user access token through the _direct access grant_ flow
     - `nodejs-apiserver`: a _bearer-only_ client used to secure the Node.js RESTful service
-
 - A custom client scope (`nodejs-apiserver`) used to set the `nodejs-apiserver` _audience_ when requesting for a user access token.
-
 - 2 realm roles: `secure` and `user`
-
 - 2 users:
-
     - `admin` with the `secure` role
     - `user` with the `user` role
 
@@ -37,7 +32,7 @@ The following steps show how to import the `nodejs-example` realm in Red Hat SSO
 * Navigate to the [nodejs-example_realm.json](./config/nodejs-example_realm.json) file location and select it
 * Click `Create`
 
-## :warning: Modify the `keycloak.json`
+### :warning: Modify the `keycloak.json`
 
 You have to adapt the `auth-server-url` property in the [keycloak.json](./keycloak.json) according to your Red Hat SSO 7 server.
 
