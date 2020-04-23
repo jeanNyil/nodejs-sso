@@ -1,16 +1,13 @@
 {
-  "realm": "Adherents_Recette",
+  "realm": "nodejs-example",
   "bearer-only": true,
-  "auth-server-url": "http://sso-sso-server.apps.cluster-deae.sandbox235.opentlc.com/auth",
-  "ssl-required": "none",
-  "disable-trust-manager": true,
-  "allow-any-hostname": true,
-  "resource": "Online-account",
+  "auth-server-url": "https://secure-sso.apps.cluster-deae.sandbox235.opentlc.com/auth/",
+  "ssl-required": "external",
+  "resource": "nodejs-apiserver",
   "verify-token-audience": true,
-  "use-resource-role-mappings": true,
   "enable-cors" : true,
   "cors-max-age" : 1000,
   "cors-allowed-methods" : "POST, PUT, DELETE, GET",
-  "confidential-port": 0,
-  "connection-pool-size" : 20
+  "connection-pool-size" : 20,
+  "confidential-port": 0
 }
