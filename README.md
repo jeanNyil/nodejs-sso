@@ -68,7 +68,7 @@ Access should be denied because the `user`does not have the `secure` role.
     -d 'scope=openid nodejs-apiserver' | jq --raw-output '.access_token')
     ```
 
-2. Call the Node.js service with the retrieved `user` ${ACCESS_TOKEN} => access should be denied
+2. Call the Node.js service with the retrieved `user` ${ACCESS_TOKEN} **=> access should be denied**
 
     ```
     curl -v -w '\n' http://localhost:8080/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
@@ -107,7 +107,7 @@ Access should be granted because the `admin`user has the `secure` role.
     -d 'scope=openid nodejs-apiserver' | jq --raw-output '.access_token')
     ```
 
-2. Call the Node.js service with the retrieved `admin` {ACCESS_TOKEN} => access should be granted
+2. Call the Node.js service with the retrieved `admin` {ACCESS_TOKEN} **=> access should be granted**
 
     ```
     curl -v -w '\n' http://localhost:8080/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
