@@ -191,7 +191,6 @@ Access should be granted because the `admin`user has the `secure` role.
     ==> Deactivating certificate validation ( /!\ not recommended in PRODUCTION! )
     env NODE_TLS_REJECT_UNAUTHORIZED:  0
     { message: 'App is now running on port 8080' } 'START'
-    secure ping
     ```
 6. Create an non-secure route to expose the `nodejs-sso` RESTful service outside the OpenShift cluster.
     ```
