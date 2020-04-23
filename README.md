@@ -129,3 +129,92 @@ Access should be granted because the `admin`user has the `secure` role.
     {"message":"You did succeed to call the secure route ! :)"}
     * Closing connection 0
     ```
+
+## Deploy on OpenShift
+
+### Prerequisites
+- Access to a Red Hat OpenShift cluster v3 or v4
+
+1. Login to the OpenShift cluster
+    ```
+    oc login ...
+    ```
+2. Create an OpenShift project. For instance, `nodejs-example``
+    ```
+    oc new-project nodejs-example
+    ```
+3. Create the `nodejs-sso` OpenShift application from the git repository
+    ```
+    oc new-app nodejs:10-SCL~https://github.com/jeanNyil/nodejs-sso.git --name=nodejs-sso
+    ```
+4. You can follow the log file of the S2I build
+    ```
+    oc logs bc/nodejs-sso -f
+    Cloning "https://github.com/jeanNyil/nodejs-sso.git" ...
+        Commit:	05ec011738cc6bb0b37136fc79599d36a4bed1ba (Updated README)
+        Author:	jeanNyil <jean.nyilimbibi@gmail.com>
+        Date:	Fri Apr 24 01:03:32 2020 +0200
+    Caching blobs under "/var/cache/blobs".
+    Getting image source signatures
+    [...]
+    Successfully pushed image-registry.openshift-image-registry.svc:5000/nodejs-example/nodejs-sso@sha256:7e14b1a55a19969f8a80a41719be6db4f68a2d6f54c3ccc68365c0d4bf91acb9
+    Push successful
+    ```
+5. Verify that the `nodejs-sso` application pod is running
+    ```
+    # oc get po
+    NAME                  READY   STATUS      RESTARTS   AGE
+    nodejs-sso-1-5m5v8    1/1     Running     0          9m4s
+    nodejs-sso-1-build    0/1     Completed   0          9m54s
+    nodejs-sso-1-deploy   0/1     Completed   0          9m7s
+
+    # oc logs dc/nodejs-sso
+    Environment:
+        DEV_MODE=false
+        NODE_ENV=production
+        DEBUG_PORT=5858
+    Launching via npm...
+    npm info it worked if it ends with ok
+    npm info using npm@6.13.4
+    npm info using node@v10.19.0
+    npm info lifecycle nodejs-sso@1.0.0~prestart: nodejs-sso@1.0.0
+    npm info lifecycle nodejs-sso@1.0.0~start: nodejs-sso@1.0.0
+
+    > nodejs-sso@1.0.0 start /opt/app-root/src
+    > ts-node server.ts
+
+    Warning: connect.session() MemoryStore is not
+    designed for a production environment, as it will leak
+    memory, and will not scale past a single process.
+    ==> Deactivating certificate validation ( /!\ not recommended in PRODUCTION! )
+    env NODE_TLS_REJECT_UNAUTHORIZED:  0
+    { message: 'App is now running on port 8080' } 'START'
+    secure ping
+    ```
+6. Create an non-secure route to expose the `nodejs-sso` RESTful service outside the OpenShift cluster.
+    ```
+    oc expose svc/nodejs-sso --hostname=nodejs-sso.apps.cluster-deae.sandbox235.opentlc.com
+    ```
+    :warning: Specify the route `hostname` according to your OpenShift cluster
+
+For instance, a test with the `admin` user access token should be successful:
+
+```
+curl -v -w '\n' http://nodejs-sso.apps.cluster-deae.sandbox235.opentlc.com/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
+
+*   Trying 35.157.242.193...
+[...]
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Content-Type: application/json
+< Set-Cookie: connect.sid=s%3A6htDTJfgLeKinVnsqtDdC8kbGTQJmDsu.bDkbOIxTpcRmeVAjD3ndQhp85Oz17l2VrsP7syhFEQA; Path=/; HttpOnly
+< Date: Thu, 23 Apr 2020 23:34:03 GMT
+< Transfer-Encoding: chunked
+< Set-Cookie: 0082891b4163c99f8d261149490b3b45=217072bdc42ba6d0b8ce9a93dd893d3a; path=/; HttpOnly
+< Cache-control: private
+<
+* Connection #0 to host nodejs-sso.apps.cluster-deae.sandbox235.opentlc.com left intact
+{"message":"You did succeed to call the secure route ! :)"}
+* Closing connection 0
+```
