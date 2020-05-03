@@ -13,7 +13,7 @@ There are 2 endpoints exposed by the service:
 
 ## Configuration in Red Hat SSO 7
 
-The [nodejs-example_realm.json](./config/nodejs-example_realm.json) file is a full export of the `nodejs-example` Red Hat SSO Realm:
+The [nodejs-services_realm.json](./config/nodejs-services_realm.json) file is a full export of the `nodejs-services` Red Hat SSO Realm:
 
 - 2 clients:
     - `frontend-mock`: a _public_ client used to obtain a user access token through the _direct access grant_ flow
@@ -24,12 +24,12 @@ The [nodejs-example_realm.json](./config/nodejs-example_realm.json) file is a fu
     - `admin` with the `secure` role
     - `user` with the `user` role
 
-The following steps show how to import the `nodejs-example` realm in Red Hat SSO 7.4:
+The following steps show how to import the `nodejs-services` realm in Red Hat SSO 7.4:
 
 * Open the Red Hat SSO admin console
 * Select `Add realm` from the `Select realm`menu
 * Click `Select file` near the `import` field
-* Navigate to the [nodejs-example_realm.json](./config/nodejs-example_realm.json) file location and select it
+* Navigate to the [nodejs-services_realm.json](./config/nodejs-services_realm.json) file location and select it
 * Click `Create`
 
 ### :warning: Modify the `keycloak.json`
@@ -59,7 +59,7 @@ Access should be denied because the `user`does not have the `secure` role.
 1. Retrieve the user ${ACCESS_TOKEN}
     ```
     ACCESS_TOKEN=$(curl -k -X POST \
-    https://secure-sso.apps.cluster-deae.sandbox235.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
+    https://secure-sso.apps.cluster-1181.sandbox1736.opentlc.com/auth/realms/nodejs-services/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=user' \
     -d 'password=P@ssw0rd' \
@@ -98,7 +98,7 @@ Access should be granted because the `admin`user has the `secure` role.
 
     ```
     ACCESS_TOKEN=$(curl -k -X POST \
-    https://secure-sso.apps.cluster-deae.sandbox235.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
+    https://secure-sso.apps.cluster-1181.sandbox1736.opentlc.com/auth/realms/nodejs-services/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin' \
     -d 'password=P@ssw0rd' \
@@ -107,7 +107,7 @@ Access should be granted because the `admin`user has the `secure` role.
     -d 'scope=openid nodejs-apiserver' | jq --raw-output '.access_token')
     ```
 
-2. Call the Node.js service with the retrieved `admin` {ACCESS_TOKEN} **=> access should be granted**
+2. Call the Node.js service with the retrieved `admin` ${ACCESS_TOKEN} **=> access should be granted**
 
     ```
     curl -v -w '\n' http://localhost:8080/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
@@ -141,9 +141,9 @@ Access should be granted because the `admin`user has the `secure` role.
     ```
     oc login ...
     ```
-2. Create an OpenShift project. For instance, `nodejs-example``
+2. Create an OpenShift project. For instance, `nodejs-services`
     ```
-    oc new-project nodejs-example
+    oc new-project nodejs-services
     ```
 3. Create the `nodejs-sso` OpenShift application from the git repository
     ```
@@ -159,7 +159,7 @@ Access should be granted because the `admin`user has the `secure` role.
     Caching blobs under "/var/cache/blobs".
     Getting image source signatures
     [...]
-    Successfully pushed image-registry.openshift-image-registry.svc:5000/nodejs-example/nodejs-sso@sha256:7e14b1a55a19969f8a80a41719be6db4f68a2d6f54c3ccc68365c0d4bf91acb9
+    Successfully pushed image-registry.openshift-image-registry.svc:5000/nodejs-services/nodejs-sso@sha256:7e14b1a55a19969f8a80a41719be6db4f68a2d6f54c3ccc68365c0d4bf91acb9
     Push successful
     ```
 5. Verify that the `nodejs-sso` application pod is running
@@ -194,14 +194,14 @@ Access should be granted because the `admin`user has the `secure` role.
     ```
 6. Create an non-secure route to expose the `nodejs-sso` RESTful service outside the OpenShift cluster.
     ```
-    oc expose svc/nodejs-sso --hostname=nodejs-sso.apps.cluster-deae.sandbox235.opentlc.com
+    oc expose svc/nodejs-sso --hostname=nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com
     ```
     :warning: Specify the route `hostname` according to your OpenShift cluster
 
 For instance, a test with the `admin` user access token should be successful:
 
 ```
-curl -v -w '\n' http://nodejs-sso.apps.cluster-deae.sandbox235.opentlc.com/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
+curl -v -w '\n' http://nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
 
 *   Trying 35.157.242.193...
 [...]
@@ -215,7 +215,7 @@ curl -v -w '\n' http://nodejs-sso.apps.cluster-deae.sandbox235.opentlc.com/secur
 < Set-Cookie: 0082891b4163c99f8d261149490b3b45=217072bdc42ba6d0b8ce9a93dd893d3a; path=/; HttpOnly
 < Cache-control: private
 <
-* Connection #0 to host nodejs-sso.apps.cluster-deae.sandbox235.opentlc.com left intact
+* Connection #0 to host nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com left intact
 {"message":"You did succeed to call the secure route ! :)"}
 * Closing connection 0
 ```
