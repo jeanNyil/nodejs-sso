@@ -218,7 +218,7 @@ http://nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com/securePing \
 -H "Authorization: Bearer ${ACCESS_TOKEN}"
 ```
 ```
-*   Trying 35.157.242.193...
+*   Trying 52.58.166.129...
 [...]
 < HTTP/1.1 200 OK
 < X-Powered-By: Express
