@@ -205,14 +205,17 @@ Access should be granted because the `admin`user has the `secure` role.
     ```
 6. Create an non-secure route to expose the `nodejs-sso` RESTful service outside the OpenShift cluster.
     ```
-    oc expose svc/nodejs-sso --hostname=nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com
+    oc expose svc/nodejs-sso \
+    --hostname=nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com
     ```
     :warning: Specify the route `hostname` according to your OpenShift cluster
 
 For instance, a test with the `admin` user access token should be successful:
 
 ```
-curl -v -w '\n' http://nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
+curl -v -w '\n' \
+http://nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com/securePing \
+-H "Authorization: Bearer ${ACCESS_TOKEN}"
 ```
 ```
 *   Trying 35.157.242.193...
