@@ -10,10 +10,11 @@ There are 2 endpoints exposed by the service:
 ## Pre-requisites
 - Node.js v10+
 - [Red Hat SSO 7.4](https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.4/) server up and running
+- CLI tools used for testing: `curl` and [`jq`](https://stedolan.github.io/jq/)
 
 ## Configuration in Red Hat SSO 7
 
-The [nodejs-services_realm.json](./config/nodejs-services_realm.json) file is a full export of the `nodejs-services` Red Hat SSO Realm:
+The [nodejs-example_realm.json](./config/nodejs-example_realm.json) file is a full export of the `nodejs-example` Red Hat SSO Realm:
 
 - 2 clients:
     - `frontend-mock`: a _public_ client used to obtain a user access token through the _direct access grant_ flow
@@ -24,12 +25,12 @@ The [nodejs-services_realm.json](./config/nodejs-services_realm.json) file is a 
     - `admin` with the `secure` role
     - `user` with the `user` role
 
-The following steps show how to import the `nodejs-services` realm in Red Hat SSO 7.4:
+The following steps show how to import the `nodejs-example` realm in Red Hat SSO 7.4:
 
 * Open the Red Hat SSO admin console
 * Select `Add realm` from the `Select realm`menu
 * Click `Select file` near the `import` field
-* Navigate to the [nodejs-services_realm.json](./config/nodejs-services_realm.json) file location and select it
+* Navigate to the [nodejs-example_realm.json](./config/nodejs-example_realm.json) file location and select it
 * Click `Create`
 
 ### :warning: Modify the `keycloak.json`
@@ -59,7 +60,7 @@ Access should be denied because the `user`does not have the `secure` role.
 1. Retrieve the user ${ACCESS_TOKEN}
     ```
     ACCESS_TOKEN=$(curl -k -X POST \
-    https://secure-sso.apps.cluster-1181.sandbox1736.opentlc.com/auth/realms/nodejs-services/protocol/openid-connect/token \
+    https://secure-sso.apps.cluster-1181.sandbox1736.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=user' \
     -d 'password=P@ssw0rd' \
@@ -72,7 +73,8 @@ Access should be denied because the `user`does not have the `secure` role.
 
     ```
     curl -v -w '\n' http://localhost:8080/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
-
+    ```
+    ```
     *   Trying ::1...
     * TCP_NODELAY set
     * Connected to localhost (::1) port 8080 (#0)
@@ -98,7 +100,7 @@ Access should be granted because the `admin`user has the `secure` role.
 
     ```
     ACCESS_TOKEN=$(curl -k -X POST \
-    https://secure-sso.apps.cluster-1181.sandbox1736.opentlc.com/auth/realms/nodejs-services/protocol/openid-connect/token \
+    https://secure-sso.apps.cluster-1181.sandbox1736.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin' \
     -d 'password=P@ssw0rd' \
@@ -111,7 +113,8 @@ Access should be granted because the `admin`user has the `secure` role.
 
     ```
     curl -v -w '\n' http://localhost:8080/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
-
+    ```
+    ```
     *   Trying ::1...
     * TCP_NODELAY set
     * Connected to localhost (::1) port 8080 (#0)
@@ -134,6 +137,7 @@ Access should be granted because the `admin`user has the `secure` role.
 
 ### Pre-requisites
 - Access to a [Red Hat OpenShift](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.3/) cluster v3 or v4
+- User has self-provisioner privilege or has access to a working OpenShift project
 
 ### Deployment instructions
 
@@ -141,7 +145,7 @@ Access should be granted because the `admin`user has the `secure` role.
     ```
     oc login ...
     ```
-2. Create an OpenShift project. For instance, `nodejs-services`
+2. Create an OpenShift project or use your existing OpenShift project. For instance, to create `nodejs-services`
     ```
     oc new-project nodejs-services
     ```
@@ -152,6 +156,8 @@ Access should be granted because the `admin`user has the `secure` role.
 4. You can follow the log file of the S2I build
     ```
     oc logs bc/nodejs-sso -f
+    ```
+    ```
     Cloning "https://github.com/jeanNyil/nodejs-sso.git" ...
         Commit:	05ec011738cc6bb0b37136fc79599d36a4bed1ba (Updated README)
         Author:	jeanNyil <jean.nyilimbibi@gmail.com>
@@ -164,13 +170,18 @@ Access should be granted because the `admin`user has the `secure` role.
     ```
 5. Verify that the `nodejs-sso` application pod is running
     ```
-    # oc get po
+    oc get po
+    ```
+    ```
     NAME                  READY   STATUS      RESTARTS   AGE
     nodejs-sso-1-5m5v8    1/1     Running     0          9m4s
     nodejs-sso-1-build    0/1     Completed   0          9m54s
     nodejs-sso-1-deploy   0/1     Completed   0          9m7s
-
-    # oc logs dc/nodejs-sso
+    ```
+    ```
+    oc logs dc/nodejs-sso
+    ```
+    ```
     Environment:
         DEV_MODE=false
         NODE_ENV=production
@@ -202,7 +213,8 @@ For instance, a test with the `admin` user access token should be successful:
 
 ```
 curl -v -w '\n' http://nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
-
+```
+```
 *   Trying 35.157.242.193...
 [...]
 < HTTP/1.1 200 OK
