@@ -60,7 +60,7 @@ Access should be denied because the `user`does not have the `secure` role.
 1. Retrieve the user ${ACCESS_TOKEN}
     ```
     ACCESS_TOKEN=$(curl -k -X POST \
-    https://secure-sso.apps.cluster-1181.sandbox1736.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
+    https://secure-sso.apps.cluster-ca12.sandbox735.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=user' \
     -d 'password=P@ssw0rd' \
@@ -100,7 +100,7 @@ Access should be granted because the `admin`user has the `secure` role.
 
     ```
     ACCESS_TOKEN=$(curl -k -X POST \
-    https://secure-sso.apps.cluster-1181.sandbox1736.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
+    https://secure-sso.apps.cluster-ca12.sandbox735.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin' \
     -d 'password=P@ssw0rd' \
@@ -206,7 +206,7 @@ Access should be granted because the `admin`user has the `secure` role.
 6. Create an non-secure route to expose the `nodejs-sso` RESTful service outside the OpenShift cluster.
     ```
     oc expose svc/nodejs-sso \
-    --hostname=nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com
+    --hostname=nodejs-sso.apps.cluster-ca12.sandbox735.opentlc.com
     ```
     :warning: Specify the route `hostname` according to your OpenShift cluster
 
@@ -214,7 +214,7 @@ For instance, a test with the `admin` user access token should be successful:
 
 ```
 curl -v -w '\n' \
-http://nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com/securePing \
+http://nodejs-sso.apps.cluster-ca12.sandbox735.opentlc.com/securePing \
 -H "Authorization: Bearer ${ACCESS_TOKEN}"
 ```
 ```
@@ -230,7 +230,7 @@ http://nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com/securePing \
 < Set-Cookie: 0082891b4163c99f8d261149490b3b45=217072bdc42ba6d0b8ce9a93dd893d3a; path=/; HttpOnly
 < Cache-control: private
 <
-* Connection #0 to host nodejs-sso.apps.cluster-1181.sandbox1736.opentlc.com left intact
+* Connection #0 to host nodejs-sso.apps.cluster-ca12.sandbox735.opentlc.com left intact
 {"message":"You did succeed to call the secure route ! :)"}
 * Closing connection 0
 ```
