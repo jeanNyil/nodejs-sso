@@ -669,18 +669,18 @@
     {
       "id": "45599fa8-cde9-4f4a-8603-a2a2e94f9557",
       "clientId": "frontend-mock",
-      "rootUrl": "http://frontend-mock.apps.cluster-ca12.sandbox735.opentlc.com",
-      "adminUrl": "http://frontend-mock.apps.cluster-ca12.sandbox735.opentlc.com",
+      "rootUrl": "http://frontend-mock.apps.cluster-4e2c.sandbox1596.opentlc.com",
+      "adminUrl": "http://frontend-mock.apps.cluster-4e2c.sandbox1596.opentlc.com",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "http://frontend-mock.apps.cluster-ca12.sandbox735.opentlc.com/*"
+        "http://frontend-mock.apps.cluster-4e2c.sandbox1596.opentlc.com/*"
       ],
       "webOrigins": [
-        "http://frontend-mock.apps.cluster-ca12.sandbox735.opentlc.com"
+        "http://frontend-mock.apps.cluster-4e2c.sandbox1596.opentlc.com"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -714,18 +714,18 @@
     {
       "id": "d8a618a5-e3a8-4822-87f0-3a3dbee46a8b",
       "clientId": "nodejs-apiserver",
-      "rootUrl": "http://nodejs-sso-nodejs-test.apps.cluster-ca12.sandbox735.opentlc.com",
-      "adminUrl": "http://nodejs-sso-nodejs-test.apps.cluster-ca12.sandbox735.opentlc.com",
+      "rootUrl": "http://nodejs-sso-nodejs-test.apps.cluster-4e2c.sandbox1596.opentlc.com",
+      "adminUrl": "http://nodejs-sso-nodejs-test.apps.cluster-4e2c.sandbox1596.opentlc.com",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "http://nodejs-sso-nodejs-test.apps.cluster-ca12.sandbox735.opentlc.com/*"
+        "http://nodejs-sso-nodejs-test.apps.cluster-4e2c.sandbox1596.opentlc.com/*"
       ],
       "webOrigins": [
-        "http://nodejs-sso-nodejs-test.apps.cluster-ca12.sandbox735.opentlc.com"
+        "http://nodejs-sso-nodejs-test.apps.cluster-4e2c.sandbox1596.opentlc.com"
       ],
       "notBefore": 0,
       "bearerOnly": true,
