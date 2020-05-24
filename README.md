@@ -60,7 +60,7 @@ Access should be denied because the `user`does not have the `secure` role.
 1. Retrieve the user ${ACCESS_TOKEN}
     ```
     ACCESS_TOKEN=$(curl -k -X POST \
-    https://secure-sso.apps.cluster-4e2c.sandbox1596.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
+    https://sso.apps.cluster-4e2c.sandbox1596.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=user' \
     -d 'password=P@ssw0rd' \
@@ -100,7 +100,7 @@ Access should be granted because the `admin`user has the `secure` role.
 
     ```
     ACCESS_TOKEN=$(curl -k -X POST \
-    https://secure-sso.apps.cluster-4e2c.sandbox1596.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
+    https://sso.apps.cluster-4e2c.sandbox1596.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin' \
     -d 'password=P@ssw0rd' \
