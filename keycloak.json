@@ -1,7 +1,7 @@
 {
   "realm": "nodejs-example",
   "bearer-only": true,
-  "auth-server-url": "https://secure-sso.apps.cluster-ca12.sandbox735.opentlc.com/auth/",
+  "auth-server-url": "https://secure-sso.apps.cluster-4e2c.sandbox1596.opentlc.com/auth/",
   "ssl-required": "external",
   "resource": "nodejs-apiserver",
   "verify-token-audience": true,
