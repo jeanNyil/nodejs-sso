@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rhsso-adapter-config
+  labels:
+    app: nodejs-sso
+data:
+  keycloak.json: >-
+    {
+      "realm": "nodejs-example",
+      "bearer-only": true,
+      "auth-server-url": "https://sso.apps.cluster-4e2c.sandbox1596.opentlc.com/auth/",
+      "ssl-required": "external",
+      "resource": "nodejs-apiserver",
+      "verify-token-audience": true,
+      "enable-cors" : true,
+      "cors-max-age" : 1000,
+      "cors-allowed-methods" : "POST, PUT, DELETE, GET",
+      "connection-pool-size" : 20,
+      "confidential-port": 0
+    }
