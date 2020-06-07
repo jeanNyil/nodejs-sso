@@ -147,7 +147,7 @@ Access should be granted because the `admin`user has the `secure` role.
     ```
 2. Create an OpenShift project or use your existing OpenShift project. For instance, to create `nodejs-services`
     ```
-    oc new-project nodejs-services
+    oc new-project nodejs-services --display-name="Node.js Services"
     ```
 3. Create the `nodejs-sso` OpenShift application from the git repository
     ```
