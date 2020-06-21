@@ -151,7 +151,9 @@ Access should be granted because the `admin`user has the `secure` role.
     ```
 3. Create the `nodejs-sso` OpenShift application from the git repository
     ```
-    oc new-app nodejs:10-SCL~https://github.com/jeanNyil/nodejs-sso.git --name=nodejs-sso
+    oc new-app https://github.com/jeanNyil/nodejs-sso.git \
+    --name=nodejs-sso \
+    --image-stream="openshift/nodejs:12"
     ```
 4. You can follow the log file of the S2I build
     ```
