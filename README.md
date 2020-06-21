@@ -191,7 +191,7 @@ Access should be granted because the `admin`user has the `secure` role.
     Launching via npm...
     npm info it worked if it ends with ok
     npm info using npm@6.13.4
-    npm info using node@v10.19.0
+    npm info using node@v12.16.1
     npm info lifecycle nodejs-sso@1.0.0~prestart: nodejs-sso@1.0.0
     npm info lifecycle nodejs-sso@1.0.0~start: nodejs-sso@1.0.0
 
@@ -203,7 +203,7 @@ Access should be granted because the `admin`user has the `secure` role.
     memory, and will not scale past a single process.
     ==> Deactivating certificate validation ( /!\ not recommended in PRODUCTION! )
     env NODE_TLS_REJECT_UNAUTHORIZED:  0
-    { message: 'App is now running on port 8080' } 'START'
+    { message: 'App is now running on port 8080' } START
     ```
 6. Create an non-secure route to expose the `nodejs-sso` RESTful service outside the OpenShift cluster.
     ```
