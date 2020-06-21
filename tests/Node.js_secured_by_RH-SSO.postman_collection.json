@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "f87cd49c-65e5-46b8-8d33-86d26b04dfd4",
+		"name": "Node.js secured by RH-SSO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://nodejs-sso.apps.cluster-495d.sandbox1398.opentlc.com/ping",
+					"protocol": "http",
+					"host": [
+						"nodejs-sso",
+						"apps",
+						"cluster-495d",
+						"sandbox1398",
+						"opentlc",
+						"com"
+					],
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "securePing",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5MkkxUWZqVzR2VzVWQ0JwSGttSUs0TWVyM1pwMHltRkVTTFdQRkozOEk0In0.eyJleHAiOjE1OTI3NDc0ODUsImlhdCI6MTU5Mjc0NzE4NSwiYXV0aF90aW1lIjoxNTkyNzQ2OTkwLCJqdGkiOiI2ZmFiZWQyMS0wY2VjLTQwY2QtODkwMy0zYzc2ZTlhZDQ0YjciLCJpc3MiOiJodHRwczovL3Nzby5hcHBzLmNsdXN0ZXItNDk1ZC5zYW5kYm94MTM5OC5vcGVudGxjLmNvbS9hdXRoL3JlYWxtcy9ub2RlanMtZXhhbXBsZSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIyMmI2NTBjMy1kYjYxLTRhNTgtOWNkNS01YzE5MWUxYTY0YmEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmcm9udGVuZC1tb2NrIiwic2Vzc2lvbl9zdGF0ZSI6ImJmMmYyODgzLTFlMGYtNDIwZi04ZmY4LTYyMGM0MTYwYmY0YiIsImFjciI6IjAiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2Zyb250ZW5kLW1vY2suYXBwcy5jbHVzdGVyLTQ5NWQuc2FuZGJveDEzOTgub3BlbnRsYy5jb20iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJzZWN1cmUiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1hcHBsaWNhdGlvbnMiLCJ2aWV3LWNvbnNlbnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlNhbXBsZSBBZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6IlNhbXBsZSIsImZhbWlseV9uYW1lIjoiQWRtaW4iLCJlbWFpbCI6InNhbXBsZS1hZG1pbkBub2RlanMtZXhhbXBsZSJ9.cLWPjL566jbqlihBsM2SJw3DYsHUhlPg7peuOu8dqebzLuZETnoNPgyjgoPvWoBmMRtohUTphk2tse19e53HwMjLP8TWSduNPtdsM1Lgbj-919aPFs-8OOxKnuHZe2R_VQ1KSPpW0CQEpIEm3ZmsCZRwK_DYWFQAWMd0mfbbI1U-3Glo8SzWdt0i9Fw-uKW0JIKDsVVq1EmAN6hiyr1PM0LkgH_EP4YNoOXYaTie0wHkTwrF6m3DhPp5sMcnutZFBXjhOA3iio0JnCOMH_4HC3DsnCL7XlR-IflaMi1Lp-zFml9nxJU9-4MsrzCF_ZXnRWX5VXlyW4jm_qPpjmuX2Q",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://nodejs-sso.apps.cluster-495d.sandbox1398.opentlc.com/securePing",
+					"protocol": "http",
+					"host": [
+						"nodejs-sso",
+						"apps",
+						"cluster-495d",
+						"sandbox1398",
+						"opentlc",
+						"com"
+					],
+					"path": [
+						"securePing"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
