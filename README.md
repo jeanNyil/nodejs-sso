@@ -310,7 +310,8 @@ http://nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com/securePing \
 or
 
 ```
-http -v GET http://nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com/securePing Authorization:"Bearer ${ACCESS_TOKEN}"
+http -v GET http://nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com/securePing \
+Authorization:"Bearer ${ACCESS_TOKEN}"
 ```
 ```
 GET /securePing HTTP/1.1
