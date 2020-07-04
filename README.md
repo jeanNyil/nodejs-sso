@@ -10,7 +10,7 @@ There are 2 endpoints exposed by the service:
 ## Pre-requisites
 - Node.js v10+
 - [Red Hat SSO 7.4](https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.4/) server up and running
-- CLI tools used for testing: `curl` and [`jq`](https://stedolan.github.io/jq/)
+- CLI tools used for testing: `curl` (and/or [`HTTPie`](https://httpie.org/)) and [`jq`](https://stedolan.github.io/jq/)
 
 ## Configuration in Red Hat SSO 7
 
@@ -78,18 +78,48 @@ Access should be denied because the `user`does not have the `secure` role.
     *   Trying ::1...
     * TCP_NODELAY set
     * Connected to localhost (::1) port 8080 (#0)
-    [...]
+    > GET /securePing HTTP/1.1
+    > Host: localhost:8080
+    > User-Agent: curl/7.64.1
+    > Accept: */*
+    > Authorization: Bearer ey[...]
+    >
     < HTTP/1.1 403 Forbidden
     < X-Powered-By: Express
     < Access-Control-Allow-Origin: *
-    < Set-Cookie: connect.sid=s%3Avb5HEI8xc8sBDdbKyYazRbraf2xCzdmM.AyLZZvnE9T8%2F2%2FuR6KIHPOIgq7UahkBkVBf3dAkvrZQ; Path=/; HttpOnly
-    < Date: Thu, 23 Apr 2020 20:52:30 GMT
+    < Set-Cookie: connect.sid=s%3Aq1p02Z7OspNGOd54DvETKko9dydR-BoZ.eR%2BcSEpbJ9G9lnl77eVGuVc9BfJRfLjD%2FiZ1hAv2gpk; Path=/; HttpOnly
+    < Date: Sat, 04 Jul 2020 14:26:05 GMT
     < Connection: keep-alive
     < Transfer-Encoding: chunked
     <
     * Connection #0 to host localhost left intact
     Access denied
     * Closing connection 0
+    ```
+
+    or
+
+    ```
+    http -v GET http://localhost:8080/securePing Authorization:"Bearer ${ACCESS_TOKEN}"
+    ```
+    ```
+    GET /securePing HTTP/1.1
+    Accept: */*
+    Accept-Encoding: gzip, deflate
+    Authorization: Bearer ey[...]
+    Connection: keep-alive
+    Host: localhost:8080
+    User-Agent: HTTPie/2.2.0
+
+    HTTP/1.1 403 Forbidden
+    Access-Control-Allow-Origin: *
+    Connection: keep-alive
+    Date: Sat, 04 Jul 2020 14:27:27 GMT
+    Set-Cookie: connect.sid=s%3ASZzm7R6re18zH-pABwfZIy6sDcV1wFb_.KSplEs%2FvVg4kJZlqfArck2ZXH3WPRz%2F5YJtnDJ4SUQE; Path=/; HttpOnly
+    Transfer-Encoding: chunked
+    X-Powered-By: Express
+
+    Access denied
     ```
 
 ### Test with the `admin` user
@@ -118,19 +148,52 @@ Access should be granted because the `admin`user has the `secure` role.
     *   Trying ::1...
     * TCP_NODELAY set
     * Connected to localhost (::1) port 8080 (#0)
-    [...]
+    > GET /securePing HTTP/1.1
+    > Host: localhost:8080
+    > User-Agent: curl/7.64.1
+    > Accept: */*
+    > Authorization: Bearer ey[...]
+    >
     < HTTP/1.1 200 OK
     < X-Powered-By: Express
     < Access-Control-Allow-Origin: *
     < Content-Type: application/json
-    < Set-Cookie: connect.sid=s%3AiAY0_3O1agEMv6cOFukVLXgQ49vos8mo.421i0AYiqQEoUd5vEKWlnshE7Qgs4AYSom77urs89gs; Path=/; HttpOnly
-    < Date: Thu, 23 Apr 2020 21:19:19 GMT
+    < Set-Cookie: connect.sid=s%3AJwa8grWNvxbZMXNa3l_2H126dm2bE6lV.fBZDmoe3nMymoFLjbe5Gf9C2BpEUqgST6wICQ1IneFs; Path=/; HttpOnly
+    < Date: Sat, 04 Jul 2020 14:22:47 GMT
     < Connection: keep-alive
     < Transfer-Encoding: chunked
     <
     * Connection #0 to host localhost left intact
     {"message":"You did succeed to call the secure route ! :)"}
     * Closing connection 0
+    ```
+
+    or
+
+    ```
+    http -v GET http://localhost:8080/securePing Authorization:"Bearer ${ACCESS_TOKEN}"
+    ```
+    ```
+    GET /securePing HTTP/1.1
+    Accept: */*
+    Accept-Encoding: gzip, deflate
+    Authorization: Bearer ey[...]
+    Connection: keep-alive
+    Host: localhost:8080
+    User-Agent: HTTPie/2.2.0
+
+    HTTP/1.1 200 OK
+    Access-Control-Allow-Origin: *
+    Connection: keep-alive
+    Content-Type: application/json
+    Date: Sat, 04 Jul 2020 14:18:47 GMT
+    Set-Cookie: connect.sid=s%3AvL4yRyIXO7KmNRK6uAgfoZTcBg0uWGDj.aAqTSP4bkIOEFp%2FacZ9iBraokk2uiWav7IZRuL7KYJM; Path=/; HttpOnly
+    Transfer-Encoding: chunked
+    X-Powered-By: Express
+
+    {
+        "message": "You did succeed to call the secure route ! :)"
+    }
     ```
 
 ## Deploy on OpenShift
@@ -220,19 +283,55 @@ http://nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com/securePing \
 -H "Authorization: Bearer ${ACCESS_TOKEN}"
 ```
 ```
-*   Trying 52.58.166.129...
-[...]
+*   Trying 3.122.27.192...
+* TCP_NODELAY set
+* Connected to nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com (3.122.27.192) port 80 (#0)
+> GET /securePing HTTP/1.1
+> Host: nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com
+> User-Agent: curl/7.64.1
+> Accept: */*
+> Authorization: Bearer ey[...]
+>
 < HTTP/1.1 200 OK
-< X-Powered-By: Express
-< Access-Control-Allow-Origin: *
-< Content-Type: application/json
-< Set-Cookie: connect.sid=s%3A6htDTJfgLeKinVnsqtDdC8kbGTQJmDsu.bDkbOIxTpcRmeVAjD3ndQhp85Oz17l2VrsP7syhFEQA; Path=/; HttpOnly
-< Date: Thu, 23 Apr 2020 23:34:03 GMT
-< Transfer-Encoding: chunked
-< Set-Cookie: 0082891b4163c99f8d261149490b3b45=217072bdc42ba6d0b8ce9a93dd893d3a; path=/; HttpOnly
-< Cache-control: private
+< x-powered-by: Express
+< access-control-allow-origin: *
+< content-type: application/json
+< set-cookie: connect.sid=s%3Aa_Wn8wDu_FZqHLmQToklU1nLCIUEDRqY.8PqvQlWZdM9R5tCrt%2BXhryjHohMaTjE1t95J9d%2FdVrQ; Path=/; HttpOnly
+< date: Sat, 04 Jul 2020 14:37:47 GMT
+< transfer-encoding: chunked
+< set-cookie: f7bbf60e2fa065e32c519de1ee433c61=028b24f44b80a29e63afe3ab0ac249df; path=/; HttpOnly
+< cache-control: private
 <
 * Connection #0 to host nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com left intact
 {"message":"You did succeed to call the secure route ! :)"}
 * Closing connection 0
+```
+
+or
+
+```
+http -v GET http://nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com/securePing Authorization:"Bearer ${ACCESS_TOKEN}"
+```
+```
+GET /securePing HTTP/1.1
+Accept: */*
+Accept-Encoding: gzip, deflate
+Authorization: Bearer ey[...]
+Connection: keep-alive
+Host: nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com
+User-Agent: HTTPie/2.2.0
+
+HTTP/1.1 200 OK
+access-control-allow-origin: *
+cache-control: private
+content-type: application/json
+date: Sat, 04 Jul 2020 14:38:35 GMT
+set-cookie: connect.sid=s%3A1N_EYd6ov-fDlBM4Q0nKzY4ry4t1q9Ly.sEBVT3aIu3ZROWCGLhrS0Lphqsn1VYCe%2FCKgseQFB9g; Path=/; HttpOnly
+set-cookie: f7bbf60e2fa065e32c519de1ee433c61=028b24f44b80a29e63afe3ab0ac249df; path=/; HttpOnly
+transfer-encoding: chunked
+x-powered-by: Express
+
+{
+    "message": "You did succeed to call the secure route ! :)"
+}
 ```
