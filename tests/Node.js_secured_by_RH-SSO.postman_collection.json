@@ -11,12 +11,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://nodejs-sso.apps.cluster-495d.sandbox1398.opentlc.com/ping",
+					"raw": "http://nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com/ping",
 					"protocol": "http",
 					"host": [
 						"nodejs-sso",
 						"apps",
-						"cluster-495d",
+						"cluster-a98c",
 						"sandbox1398",
 						"opentlc",
 						"com"
@@ -54,12 +54,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://nodejs-sso.apps.cluster-495d.sandbox1398.opentlc.com/securePing",
+					"raw": "http://nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com/securePing",
 					"protocol": "http",
 					"host": [
 						"nodejs-sso",
 						"apps",
-						"cluster-495d",
+						"cluster-a98c",
 						"sandbox1398",
 						"opentlc",
 						"com"
