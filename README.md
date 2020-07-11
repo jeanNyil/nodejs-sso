@@ -60,7 +60,7 @@ Access should be denied because the `user`does not have the `secure` role.
 1. Retrieve the user ${ACCESS_TOKEN}
     ```
     ACCESS_TOKEN=$(curl -k -X POST \
-    https://sso.apps.cluster-a98c.sandbox430.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
+    https://sso.apps.cluster-3542.sandbox1541.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=user' \
     -d 'password=P@ssw0rd' \
@@ -130,7 +130,7 @@ Access should be granted because the `admin`user has the `secure` role.
 
     ```
     ACCESS_TOKEN=$(curl -k -X POST \
-    https://sso.apps.cluster-a98c.sandbox430.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
+    https://sso.apps.cluster-3542.sandbox1541.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
     -d 'username=admin' \
     -d 'password=P@ssw0rd' \
@@ -271,7 +271,7 @@ Access should be granted because the `admin`user has the `secure` role.
 6. Create an non-secure route to expose the `nodejs-sso` RESTful service outside the OpenShift cluster.
     ```
     oc expose svc/nodejs-sso \
-    --hostname=nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com
+    --hostname=nodejs-sso.apps.cluster-3542.sandbox1541.opentlc.com
     ```
     :warning: Specify the route `hostname` according to your OpenShift cluster
 
@@ -279,15 +279,15 @@ For instance, a test with the `admin` user access token should be successful:
 
 ```
 curl -v -w '\n' \
-http://nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com/securePing \
+http://nodejs-sso.apps.cluster-3542.sandbox1541.opentlc.com/securePing \
 -H "Authorization: Bearer ${ACCESS_TOKEN}"
 ```
 ```
 *   Trying 3.122.27.192...
 * TCP_NODELAY set
-* Connected to nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com (3.122.27.192) port 80 (#0)
+* Connected to nodejs-sso.apps.cluster-3542.sandbox1541.opentlc.com (3.122.27.192) port 80 (#0)
 > GET /securePing HTTP/1.1
-> Host: nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com
+> Host: nodejs-sso.apps.cluster-3542.sandbox1541.opentlc.com
 > User-Agent: curl/7.64.1
 > Accept: */*
 > Authorization: Bearer ey[...]
@@ -302,7 +302,7 @@ http://nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com/securePing \
 < set-cookie: f7bbf60e2fa065e32c519de1ee433c61=028b24f44b80a29e63afe3ab0ac249df; path=/; HttpOnly
 < cache-control: private
 <
-* Connection #0 to host nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com left intact
+* Connection #0 to host nodejs-sso.apps.cluster-3542.sandbox1541.opentlc.com left intact
 {"message":"You did succeed to call the secure route ! :)"}
 * Closing connection 0
 ```
@@ -310,7 +310,7 @@ http://nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com/securePing \
 or
 
 ```
-http -v GET http://nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com/securePing \
+http -v GET http://nodejs-sso.apps.cluster-3542.sandbox1541.opentlc.com/securePing \
 Authorization:"Bearer ${ACCESS_TOKEN}"
 ```
 ```
@@ -319,7 +319,7 @@ Accept: */*
 Accept-Encoding: gzip, deflate
 Authorization: Bearer ey[...]
 Connection: keep-alive
-Host: nodejs-sso.apps.cluster-a98c.sandbox430.opentlc.com
+Host: nodejs-sso.apps.cluster-3542.sandbox1541.opentlc.com
 User-Agent: HTTPie/2.2.0
 
 HTTP/1.1 200 OK
