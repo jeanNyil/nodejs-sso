@@ -243,8 +243,13 @@ Access should be granted because the `admin`user has the `secure` role.
     nodejs-sso-1-build    0/1     Completed   0          9m54s
     nodejs-sso-1-deploy   0/1     Completed   0          9m7s
     ```
+    Application logs (for _Red Hat OpenShift_ version < 4.5):
     ```
     oc logs dc/nodejs-sso
+    ```
+    or, for _Red Hat OpenShift_ version >= 4.5:
+    ```
+    oc logs deployment/nodejs-sso
     ```
     ```
     Environment:
