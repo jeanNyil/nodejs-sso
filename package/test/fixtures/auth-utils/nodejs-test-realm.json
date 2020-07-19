@@ -489,7 +489,7 @@
     "surrogateAuthRequired" : false,
     "enabled" : true,
     "clientAuthenticatorType" : "client-secret",
-    "secret" : "4ffe9e5e-5564-4508-bb50-0943542547d5",
+    "secret" : "4ffe9e5e-5564-4508-bb50-094fc38547d5",
     "defaultRoles" : [ "manage-account", "view-profile" ],
     "redirectUris" : [ "/auth/realms/master/account/*" ],
     "webOrigins" : [ ],
