@@ -43,13 +43,13 @@ You have to adapt the `auth-server-url` property in the [keycloak.json](./keyclo
 
 1. Build:
 
-    ```
+    ```zsh
     npm install
     ```
 
 2. Run the Node.js RESTful service
 
-    ```
+    ```zsh
     npm start
     ```
 
@@ -58,7 +58,7 @@ You have to adapt the `auth-server-url` property in the [keycloak.json](./keyclo
 Access should be denied because the `user`does not have the `secure` role.
 
 1. Retrieve the user ${ACCESS_TOKEN}
-    ```
+    ```zsh
     ACCESS_TOKEN=$(curl -k -X POST \
     https://sso.apps.cluster-fc38.sandbox840.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
@@ -71,10 +71,10 @@ Access should be denied because the `user`does not have the `secure` role.
 
 2. Call the Node.js service with the retrieved `user` ${ACCESS_TOKEN} **=> access should be denied**
 
-    ```
+    ```zsh
     curl -v -w '\n' http://localhost:8080/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
     ```
-    ```
+    ```zsh
     *   Trying ::1...
     * TCP_NODELAY set
     * Connected to localhost (::1) port 8080 (#0)
@@ -99,10 +99,10 @@ Access should be denied because the `user`does not have the `secure` role.
 
     or
 
-    ```
+    ```zsh
     http -v GET http://localhost:8080/securePing Authorization:"Bearer ${ACCESS_TOKEN}"
     ```
-    ```
+    ```zsh
     GET /securePing HTTP/1.1
     Accept: */*
     Accept-Encoding: gzip, deflate
@@ -128,7 +128,7 @@ Access should be granted because the `admin`user has the `secure` role.
 
 1. Retrieve the `admin` ${ACCESS_TOKEN}
 
-    ```
+    ```zsh
     ACCESS_TOKEN=$(curl -k -X POST \
     https://sso.apps.cluster-fc38.sandbox840.opentlc.com/auth/realms/nodejs-example/protocol/openid-connect/token \
     -H 'content-type: application/x-www-form-urlencoded' \
@@ -141,10 +141,10 @@ Access should be granted because the `admin`user has the `secure` role.
 
 2. Call the Node.js service with the retrieved `admin` ${ACCESS_TOKEN} **=> access should be granted**
 
-    ```
+    ```zsh
     curl -v -w '\n' http://localhost:8080/securePing -H "Authorization: Bearer ${ACCESS_TOKEN}"
     ```
-    ```
+    ```zsh
     *   Trying ::1...
     * TCP_NODELAY set
     * Connected to localhost (::1) port 8080 (#0)
@@ -170,10 +170,10 @@ Access should be granted because the `admin`user has the `secure` role.
 
     or
 
-    ```
+    ```zsh
     http -v GET http://localhost:8080/securePing Authorization:"Bearer ${ACCESS_TOKEN}"
     ```
-    ```
+    ```zsh
     GET /securePing HTTP/1.1
     Accept: */*
     Accept-Encoding: gzip, deflate
@@ -205,24 +205,24 @@ Access should be granted because the `admin`user has the `secure` role.
 ### Deployment instructions
 
 1. Login to the OpenShift cluster
-    ```
+    ```zsh
     oc login ...
     ```
 2. Create an OpenShift project or use your existing OpenShift project. For instance, to create `nodejs-services`
-    ```
+    ```zsh
     oc new-project nodejs-services --display-name="Node.js Services"
     ```
 3. Create the `nodejs-sso` OpenShift application from the git repository
-    ```
+    ```zsh
     oc new-app https://github.com/jeanNyil/nodejs-sso.git \
     --name=nodejs-sso \
     --image-stream="openshift/nodejs:12"
     ```
 4. You can follow the log file of the S2I build
-    ```
+    ```zsh
     oc logs bc/nodejs-sso -f
     ```
-    ```
+    ```zsh
     Cloning "https://github.com/jeanNyil/nodejs-sso.git" ...
         Commit:	05ec011738cc6bb0b37136fc79599d36a4bed1ba (Updated README)
         Author:	jeanNyil <jean.nyilimbibi@gmail.com>
@@ -234,24 +234,24 @@ Access should be granted because the `admin`user has the `secure` role.
     Push successful
     ```
 5. Verify that the `nodejs-sso` application pod is running
-    ```
+    ```zsh
     oc get po
     ```
-    ```
+    ```zsh
     NAME                  READY   STATUS      RESTARTS   AGE
     nodejs-sso-1-5m5v8    1/1     Running     0          9m4s
     nodejs-sso-1-build    0/1     Completed   0          9m54s
     nodejs-sso-1-deploy   0/1     Completed   0          9m7s
     ```
     Application logs (for _Red Hat OpenShift_ version < 4.5):
-    ```
+    ```zsh
     oc logs dc/nodejs-sso
     ```
     or, for _Red Hat OpenShift_ version >= 4.5:
-    ```
+    ```zsh
     oc logs deployment/nodejs-sso
     ```
-    ```
+    ```zsh
     Environment:
         DEV_MODE=false
         NODE_ENV=production
@@ -274,7 +274,7 @@ Access should be granted because the `admin`user has the `secure` role.
     { message: 'App is now running on port 8080' } START
     ```
 6. Create an non-secure route to expose the `nodejs-sso` RESTful service outside the OpenShift cluster.
-    ```
+    ```zsh
     oc expose svc/nodejs-sso \
     --hostname=nodejs-sso.apps.cluster-fc38.sandbox840.opentlc.com
     ```
@@ -282,12 +282,12 @@ Access should be granted because the `admin`user has the `secure` role.
 
 For instance, a test with the `admin` user access token should be successful:
 
-```
+```zsh
 curl -v -w '\n' \
 http://nodejs-sso.apps.cluster-fc38.sandbox840.opentlc.com/securePing \
 -H "Authorization: Bearer ${ACCESS_TOKEN}"
 ```
-```
+```zsh
 *   Trying 3.122.27.192...
 * TCP_NODELAY set
 * Connected to nodejs-sso.apps.cluster-fc38.sandbox840.opentlc.com (3.122.27.192) port 80 (#0)
@@ -314,11 +314,11 @@ http://nodejs-sso.apps.cluster-fc38.sandbox840.opentlc.com/securePing \
 
 or
 
-```
+```zsh
 http -v GET http://nodejs-sso.apps.cluster-fc38.sandbox840.opentlc.com/securePing \
 Authorization:"Bearer ${ACCESS_TOKEN}"
 ```
-```
+```zsh
 GET /securePing HTTP/1.1
 Accept: */*
 Accept-Encoding: gzip, deflate
