@@ -9,7 +9,7 @@ data:
     {
       "realm": "nodejs-example",
       "bearer-only": true,
-      "auth-server-url": "https://sso.apps.cluster-fc38.sandbox840.opentlc.com/auth/",
+      "auth-server-url": "https://sso.apps.cluster-2149.sandbox1775.opentlc.com/auth/",
       "ssl-required": "external",
       "resource": "nodejs-apiserver",
       "verify-token-audience": true,
