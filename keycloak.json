@@ -1,11 +1,7 @@
 {
   "realm": "nodejs-example",
   "bearer-only": true,
-<<<<<<< HEAD
   "auth-server-url": "https://sso.apps.jeannyil.sandbox1047.opentlc.com/auth/",
-=======
-  "auth-server-url": "https://sso.apps.cluster-2422.sandbox1120.opentlc.com/auth/",
->>>>>>> 21741df182b0d76c5d71e62196742448998e06d0
   "ssl-required": "external",
   "resource": "nodejs-apiserver",
   "verify-token-audience": true,

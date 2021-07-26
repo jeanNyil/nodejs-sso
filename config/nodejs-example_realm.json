@@ -669,33 +669,20 @@
     {
       "id": "45599fa8-cde9-4f4a-8603-a2a2e94f9557",
       "clientId": "frontend-mock",
-<<<<<<< HEAD
       "rootUrl": "http://frontend-mock.apps.jeannyil.sandbox1047.opentlc.com",
       "adminUrl": "http://frontend-mock.apps.jeannyil.sandbox1047.opentlc.com",
-=======
-      "rootUrl": "http://frontend-mock.apps.cluster-2422.sandbox1120.opentlc.com",
-      "adminUrl": "http://frontend-mock.apps.cluster-2422.sandbox1120.opentlc.com",
->>>>>>> 21741df182b0d76c5d71e62196742448998e06d0
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-<<<<<<< HEAD
         "http://frontend-mock.apps.jeannyil.sandbox1047.opentlc.com/*",
-=======
-        "http://frontend-mock.apps.cluster-2422.sandbox1120.opentlc.com/*",
->>>>>>> 21741df182b0d76c5d71e62196742448998e06d0
         "https://www.postman.com/oauth2/callback",
         "https://oauth.pstmn.io/v1/callback"
       ],
       "webOrigins": [
-<<<<<<< HEAD
         "http://frontend-mock.apps.jeannyil.sandbox1047.opentlc.com"
-=======
-        "http://frontend-mock.apps.cluster-2422.sandbox1120.opentlc.com"
->>>>>>> 21741df182b0d76c5d71e62196742448998e06d0
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -729,30 +716,18 @@
     {
       "id": "d8a618a5-e3a8-4822-87f0-3a3dbee46a8b",
       "clientId": "nodejs-apiserver",
-<<<<<<< HEAD
       "rootUrl": "http://nodejs-sso-nodejs-test.apps.jeannyil.sandbox1047.opentlc.com",
       "adminUrl": "http://nodejs-sso-nodejs-test.apps.jeannyil.sandbox1047.opentlc.com",
-=======
-      "rootUrl": "http://nodejs-sso-nodejs-test.apps.cluster-2422.sandbox1120.opentlc.com",
-      "adminUrl": "http://nodejs-sso-nodejs-test.apps.cluster-2422.sandbox1120.opentlc.com",
->>>>>>> 21741df182b0d76c5d71e62196742448998e06d0
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-<<<<<<< HEAD
         "http://nodejs-sso-nodejs-test.apps.jeannyil.sandbox1047.opentlc.com/*"
       ],
       "webOrigins": [
         "http://nodejs-sso-nodejs-test.apps.jeannyil.sandbox1047.opentlc.com"
-=======
-        "http://nodejs-sso-nodejs-test.apps.cluster-2422.sandbox1120.opentlc.com/*"
-      ],
-      "webOrigins": [
-        "http://nodejs-sso-nodejs-test.apps.cluster-2422.sandbox1120.opentlc.com"
->>>>>>> 21741df182b0d76c5d71e62196742448998e06d0
       ],
       "notBefore": 0,
       "bearerOnly": true,
